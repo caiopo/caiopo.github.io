@@ -1,0 +1,10 @@
+# Site settings
+title: caiopo's personal page
+tag_text: caiopo
+description: Hello
+
+# Build settings
+markdown: kramdown
+exclude: ["README.md"]
+sass:
+  style: compressed
