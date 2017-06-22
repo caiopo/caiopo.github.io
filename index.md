@@ -4,7 +4,7 @@ layout: default
 
 Hello, my name is Caio Pereira Oliveira, I'm a Computer Science undergraduate student at [UFSC](http://ufsc.br) and this is my personal site.
 
-[facebook](https://www.facebook.com/caiopo)
+<!-- [facebook](https://www.facebook.com/caiopo) -->
 
 [caiopoliveira@gmail.com](mailto:caiopoliveira@gmail.com)
 
