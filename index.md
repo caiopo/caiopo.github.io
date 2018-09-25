@@ -2,7 +2,7 @@
 layout: default
 ---
 
-CompSci Undergraduate, Mobile Developer
+CompSci Undergraduate student, Mobile Developer
 
 [caiopoliveira@gmail.com](mailto:caiopoliveira@gmail.com)
 
