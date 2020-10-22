@@ -1,5 +1,23 @@
 {
-  "main.js": "render-page.js",
-  "main.js.map": "render-page.js.map",
-  "static/avatar.jpg": "static/avatar-29bf02daf81d85eec1d7fd5b1ed6a63b.jpg"
+    "name": "caiopo's website",
+    "short_name": "caiopo",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#111111",
+    "theme_color": "#FFEB3B",
+    "description": "caiopo's personal website",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
 }
