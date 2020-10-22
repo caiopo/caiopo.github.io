@@ -1,10 +1,11 @@
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
+
 
 import 'package:animated_background/animated_background.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_site/particles.dart';
+import 'package:personal_site/songs.dart';
+import 'package:personal_site/utils.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -39,21 +40,7 @@ class _HomePageState extends State<HomePage>
       onExit: _onExit,
       child: Scaffold(
         backgroundColor: const Color(0xFF111111),
-        floatingActionButton: FloatingActionButton.extended(
-          icon: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            child: Image.asset('assets/music.png', width: 24, height: 24),
-          ),
-          label: Text(
-            'SONG RECOMMENDATION',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 20,
-            ),
-          ),
-          backgroundColor: Colors.yellow,
-          onPressed: () {},
-        ),
+        floatingActionButton: SongsButton(),
         body: AnimatedBackground(
           behaviour: MouseAvoidingParticleBehaviour(
             mousePosition: _mousePosition ?? mq.size.center(Offset.zero),
@@ -179,7 +166,7 @@ class _Link extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(4),
-      onTap: () => html.window.open(url, '_blank'),
+      onTap: () => openUrl(url),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Text(
