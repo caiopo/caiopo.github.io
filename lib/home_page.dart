@@ -32,28 +32,26 @@ class _HomePageState extends State<HomePage>
     final mq = MediaQuery.of(context);
 
     return Scaffold(
+      backgroundColor: const Color(0xFF111111),
       body: MouseRegion(
         onEnter: _onEnter,
         onHover: _onHover,
         onExit: _onExit,
-        child: Container(
-          color: Colors.black,
-          child: AnimatedBackground(
-            behaviour: MouseAvoidingParticleBehaviour(
-              mousePosition: _mousePosition ?? mq.size.center(Offset.zero),
-              options: ParticleOptions(
-                spawnMinSpeed: 50.0,
-                spawnMaxSpeed: 100.0,
-                spawnMinRadius: 3.0,
-                spawnMaxRadius: 8.0,
-                maxOpacity: 1.0,
-                minOpacity: 0.8,
-                baseColor: Colors.yellow,
-              ),
+        child: AnimatedBackground(
+          behaviour: MouseAvoidingParticleBehaviour(
+            mousePosition: _mousePosition ?? mq.size.center(Offset.zero),
+            options: ParticleOptions(
+              spawnMinSpeed: 50.0,
+              spawnMaxSpeed: 100.0,
+              spawnMinRadius: 3.0,
+              spawnMaxRadius: 8.0,
+              minOpacity: 0.8,
+              maxOpacity: 1.0,
+              baseColor: Colors.yellow,
             ),
-            vsync: this,
-            child: Container(),
           ),
+          vsync: this,
+          child: Container(),
         ),
       ),
     );

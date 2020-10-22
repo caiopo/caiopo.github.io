@@ -11,16 +11,6 @@ class MouseAvoidingParticleBehaviour extends RandomParticleBehaviour {
   }) : super(options: options, paint: paint);
 
   @override
-  void initParticle(Particle p) {
-    super.initParticle(p);
-
-    // p.data = Offset(
-    //   RandomParticleBehaviour.random.nextDouble(),
-    //   RandomParticleBehaviour.random.nextDouble(),
-    // );
-  }
-
-  @override
   void updateParticle(Particle particle, double delta, Duration elapsed) {
     if (mousePosition != null) {
       particle.dx = (particle.cx - mousePosition.dx) * _speedFactor;
@@ -30,4 +20,4 @@ class MouseAvoidingParticleBehaviour extends RandomParticleBehaviour {
   }
 }
 
-const _speedFactor = 0.8;
+const _speedFactor = 0.7;
