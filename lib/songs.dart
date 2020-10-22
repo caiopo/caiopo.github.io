@@ -32,17 +32,27 @@ Future<void> recommendSong() async {
   if (200 <= response.statusCode && response.statusCode < 300) {
     final body = jsonDecode(response.body);
 
-    final tracks = body['toptracks']['track'].sublist(0, 10);
-
-    for (final t in tracks) {
-      print('${t['name']} ${t['playcount']}');
-    }
-
+    final tracks = body['toptracks']['track'].sublist(0, 20);
     tracks.shuffle();
+
     final chosen = tracks.first;
 
-    print(chosen);
+    final url = await youtubeLink(
+      '${chosen['artist']['name']} ${chosen['name']}',
+    );
 
-    openUrl(chosen['url']);
+    openUrl(url ?? chosen['url']);
+  }
+}
+
+Future<String> youtubeLink(String query) async {
+  try {
+    final result = await get('https://caio-top-songs.builtwithdark.com/yt/' +
+        query.replaceAll(' ', '+'));
+    final video = jsonDecode(result.body)['video'].first;
+    return 'https://www.youtube.com/watch?v=' + video['encrypted_id'];
+  } catch (e) {
+    print(e);
+    return null;
   }
 }
