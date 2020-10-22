@@ -10,9 +10,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'caiopo\'s website',
-      theme: ThemeData(primarySwatch: Colors.yellow),
+      theme: buildTheme(),
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
   }
+}
+
+
+ThemeData buildTheme() {
+  final base = ThemeData.dark();
+  return base.copyWith(
+    textTheme: base.textTheme.apply(
+      fontFamily: 'Inconsolata'
+    ),
+  );
 }
