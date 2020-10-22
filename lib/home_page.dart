@@ -1,5 +1,3 @@
-
-
 import 'package:animated_background/animated_background.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -87,22 +85,19 @@ class Info extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text.rich(
-                TextSpan(
-                  text: 'My name is ',
-                  children: [
-                    TextSpan(
-                      text: 'Caio',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.yellow.shade600,
-                      ),
-                    ),
-                  ],
-                ),
+              Text(
+                'My name is ',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 48,
+                ),
+              ),
+              Text(
+                'Caio',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 48,
+                  color: Colors.yellow.shade600,
                 ),
               ),
               const SizedBox(width: 16),

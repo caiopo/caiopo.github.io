@@ -1,10 +1,19 @@
 import 'dart:convert';
 
+import 'package:animated_size_and_fade/animated_size_and_fade.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:personal_site/utils.dart';
 
-class SongsButton extends StatelessWidget {
+class SongsButton extends StatefulWidget {
+  @override
+  _SongsButtonState createState() => _SongsButtonState();
+}
+
+class _SongsButtonState extends State<SongsButton>
+    with TickerProviderStateMixin {
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
@@ -12,16 +21,29 @@ class SongsButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 4),
         child: Image.asset('assets/music.png', width: 24, height: 24),
       ),
-      label: Text(
-        'SONG RECOMMENDATION',
-        style: TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 20,
+      label: AnimatedSizeAndFade(
+        vsync: this,
+        child: Text(
+          loading ? 'THINKING...' : 'SONG RECOMMENDATION',
+          key: Key('$loading'),
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 20,
+          ),
         ),
       ),
       tooltip: 'Opens a random song that I\'m listening on repeat!',
       backgroundColor: Colors.yellow,
-      onPressed: () => recommendSong(),
+      onPressed: loading
+          ? null
+          : () async {
+              try {
+                setState(() => loading = true);
+                await recommendSong();
+              } finally {
+                setState(() => loading = false);
+              }
+            },
     );
   }
 }
