@@ -78,7 +78,7 @@ class Info extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 16),
-              Image.asset('assets/wave.png', width: 48, height: 48),
+              Image.asset('assets/icons/wave.png', width: 48, height: 48),
             ],
           ),
           const SizedBox(height: 48),
@@ -101,7 +101,7 @@ class Info extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 16),
-              Image.asset('assets/rocket.png', width: 48, height: 48),
+              Image.asset('assets/icons/rocket.png', width: 48, height: 48),
             ],
           ),
           const SizedBox(height: 48),
@@ -110,14 +110,13 @@ class Info extends StatelessWidget {
             children: [
               Text(
                 'I work as a Mobile App Developer',
-                textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 36,
                 ),
               ),
               const SizedBox(width: 16),
-              Image.asset('assets/phone.png', width: 48, height: 48),
+              Image.asset('assets/icons/phone.png', width: 48, height: 48),
             ],
           ),
           const SizedBox(height: 72),

@@ -19,7 +19,7 @@ class _SongsButtonState extends State<SongsButton>
     return FloatingActionButton.extended(
       icon: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4),
-        child: Image.asset('assets/music.png', width: 24, height: 24),
+        child: Image.asset('assets/icons/music.png', width: 24, height: 24),
       ),
       label: AnimatedSizeAndFade(
         vsync: this,
