@@ -31,6 +31,8 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
+    final scaling = (mq.size.width / 700).clamp(0.5, 1.0).toDouble();
+    print('screen size: ${mq.size}, scaling: $scaling');
 
     return MouseRegion(
       onEnter: _onEnter,
@@ -53,7 +55,7 @@ class _HomePageState extends State<HomePage>
             ),
           ),
           vsync: this,
-          child: Info(),
+          child: Info(scaling: scaling),
         ),
       ),
     );
@@ -61,6 +63,10 @@ class _HomePageState extends State<HomePage>
 }
 
 class Info extends StatelessWidget {
+  final double scaling;
+
+  const Info({Key key, this.scaling}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -72,13 +78,17 @@ class Info extends StatelessWidget {
             children: [
               Text(
                 'Hi there!',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 36,
+                  fontSize: 36 * scaling,
                 ),
               ),
-              const SizedBox(width: 16),
-              Image.asset('assets/icons/wave.png', width: 48, height: 48),
+              SizedBox(width: 16 * scaling),
+              Image.asset(
+                'assets/icons/wave.png',
+                width: 48 * scaling,
+                height: 48 * scaling,
+              ),
             ],
           ),
           const SizedBox(height: 48),
@@ -87,21 +97,25 @@ class Info extends StatelessWidget {
             children: [
               Text(
                 'My name is ',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 48,
+                  fontSize: 48 * scaling,
                 ),
               ),
               Text(
                 'Caio',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 48,
+                  fontSize: 48 * scaling,
                   color: Colors.yellow.shade600,
                 ),
               ),
-              const SizedBox(width: 16),
-              Image.asset('assets/icons/rocket.png', width: 48, height: 48),
+              SizedBox(width: 16 * scaling),
+              Image.asset(
+                'assets/icons/rocket.png',
+                width: 48 * scaling,
+                height: 48 * scaling,
+              ),
             ],
           ),
           const SizedBox(height: 48),
@@ -110,51 +124,73 @@ class Info extends StatelessWidget {
             children: [
               Text(
                 'I work as a Mobile App Developer',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 36,
+                  fontSize: 36 * scaling,
                 ),
               ),
-              const SizedBox(width: 16),
-              Image.asset('assets/icons/phone.png', width: 48, height: 48),
+              SizedBox(width: 16 * scaling),
+              Image.asset(
+                'assets/icons/phone.png',
+                width: 48 * scaling,
+                height: 48 * scaling,
+              ),
             ],
           ),
           const SizedBox(height: 72),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _Link(
-                label: 'Resume',
-                url: 'https://www.toptal.com/resume/caio-pereira-oliveira',
-              ),
-              _Slash(),
-              _Link(
-                label: 'LinkedIn',
-                url: 'https://www.linkedin.com/in/caiopo/',
-              ),
-              _Slash(),
-              _Link(
-                label: 'GitHub',
-                url: 'http://github.com/caiopo',
-              ),
-              _Slash(),
-              _Link(
-                label: 'Email',
-                url: 'mailto:hello@caiopo.com',
-              ),
-            ],
-          )
+          LinkBar(scaling: scaling),
         ],
       ),
     );
   }
 }
 
+class LinkBar extends StatelessWidget {
+  final double scaling;
+
+  const LinkBar({Key key, this.scaling}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (context, constraints) {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _Link(
+            label: 'Resume',
+            url: 'https://www.toptal.com/resume/caio-pereira-oliveira',
+            scaling: scaling,
+          ),
+          _Slash(scaling: scaling),
+          _Link(
+            label: 'LinkedIn',
+            url: 'https://www.linkedin.com/in/caiopo/',
+            scaling: scaling,
+          ),
+          _Slash(scaling: scaling),
+          _Link(
+            label: 'GitHub',
+            url: 'http://github.com/caiopo',
+            scaling: scaling,
+          ),
+          _Slash(scaling: scaling),
+          _Link(
+            label: 'Email',
+            url: 'mailto:hello@caiopo.com',
+            scaling: scaling,
+          ),
+        ],
+      );
+    });
+  }
+}
+
 class _Link extends StatelessWidget {
   final String label;
   final String url;
+  final double scaling;
 
-  const _Link({Key key, this.label, this.url}) : super(key: key);
+  const _Link({Key key, this.label, this.url, this.scaling}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -165,9 +201,9 @@ class _Link extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 24,
+            fontSize: 24 * scaling,
             decoration: TextDecoration.underline,
           ),
         ),
@@ -177,15 +213,19 @@ class _Link extends StatelessWidget {
 }
 
 class _Slash extends StatelessWidget {
+  final double scaling;
+
+  const _Slash({Key key, this.scaling}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Text(
         '//',
-        style: const TextStyle(
+        style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 24,
+          fontSize: 24 * scaling,
           color: Colors.yellow,
         ),
       ),
