@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
-    final scaling = (mq.size.width / 700).clamp(0.5, 1.0).toDouble();
+    final scaling = (mq.size.width / 800).clamp(0.4, 1.0).toDouble();
     print('screen size: ${mq.size}, scaling: $scaling');
 
     return MouseRegion(
@@ -91,7 +91,7 @@ class Info extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 48),
+          SizedBox(height: 48 * scaling),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -118,9 +118,10 @@ class Info extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 48),
+          SizedBox(height: 48 * scaling),
           Row(
             mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 'I work as a Mobile App Developer',
@@ -129,6 +130,34 @@ class Info extends StatelessWidget {
                   fontSize: 36 * scaling,
                 ),
               ),
+              // if (MediaQuery.of(context).size.width > 340)
+              //   Text(
+              //     'I work as a Mobile App Developer',
+              //     style: TextStyle(
+              //       fontWeight: FontWeight.bold,
+              //       fontSize: 36 * scaling,
+              //     ),
+              //   )
+              // else
+              //   Column(
+              //     crossAxisAlignment: CrossAxisAlignment.end,
+              //     children: [
+              //       Text(
+              //         'I work as a',
+              //         style: TextStyle(
+              //           fontWeight: FontWeight.bold,
+              //           fontSize: 36 * scaling,
+              //         ),
+              //       ),
+              //       Text(
+              //         'Mobile App Developer',
+              //         style: TextStyle(
+              //           fontWeight: FontWeight.bold,
+              //           fontSize: 36 * scaling,
+              //         ),
+              //       )
+              //     ],
+              //   ),
               SizedBox(width: 16 * scaling),
               Image.asset(
                 'assets/icons/phone.png',
@@ -137,7 +166,7 @@ class Info extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 72),
+          SizedBox(height: 72 * scaling),
           LinkBar(scaling: scaling),
         ],
       ),
@@ -152,36 +181,68 @@ class LinkBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      return Row(
-        mainAxisSize: MainAxisSize.min,
+    final mq = MediaQuery.of(context);
+
+    if (mq.size.width < 500) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _Link(
             label: 'Resume',
             url: 'https://www.toptal.com/resume/caio-pereira-oliveira',
             scaling: scaling,
+            showArrow: true,
           ),
-          _Slash(scaling: scaling),
           _Link(
             label: 'LinkedIn',
             url: 'https://www.linkedin.com/in/caiopo/',
             scaling: scaling,
+            showArrow: true,
           ),
-          _Slash(scaling: scaling),
           _Link(
             label: 'GitHub',
             url: 'http://github.com/caiopo',
             scaling: scaling,
+            showArrow: true,
           ),
-          _Slash(scaling: scaling),
           _Link(
             label: 'Email',
             url: 'mailto:hello@caiopo.com',
             scaling: scaling,
+            showArrow: true,
           ),
         ],
       );
-    });
+    }
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _Link(
+          label: 'Resume',
+          url: 'https://www.toptal.com/resume/caio-pereira-oliveira',
+          scaling: scaling,
+        ),
+        _Slash(scaling: scaling),
+        _Link(
+          label: 'LinkedIn',
+          url: 'https://www.linkedin.com/in/caiopo/',
+          scaling: scaling,
+        ),
+        _Slash(scaling: scaling),
+        _Link(
+          label: 'GitHub',
+          url: 'http://github.com/caiopo',
+          scaling: scaling,
+        ),
+        _Slash(scaling: scaling),
+        _Link(
+          label: 'Email',
+          url: 'mailto:hello@caiopo.com',
+          scaling: scaling,
+        ),
+      ],
+    );
   }
 }
 
@@ -189,8 +250,15 @@ class _Link extends StatelessWidget {
   final String label;
   final String url;
   final double scaling;
+  final bool showArrow;
 
-  const _Link({Key key, this.label, this.url, this.scaling}) : super(key: key);
+  const _Link({
+    Key key,
+    this.label,
+    this.url,
+    this.scaling,
+    this.showArrow = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -198,14 +266,28 @@ class _Link extends StatelessWidget {
       borderRadius: BorderRadius.circular(4),
       onTap: () => openUrl(url),
       child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 24 * scaling,
-            decoration: TextDecoration.underline,
-          ),
+        padding: EdgeInsets.all(16 * scaling),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (showArrow)
+              Text(
+                '> ',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28 * scaling,
+                  color: Colors.yellow.shade600,
+                ),
+              ),
+            Text(
+              label,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 28 * scaling,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -225,7 +307,7 @@ class _Slash extends StatelessWidget {
         '//',
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 24 * scaling,
+          fontSize: 28 * scaling,
           color: Colors.yellow,
         ),
       ),
