@@ -4,17 +4,17 @@ const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
   "version.json": "4b65d2b4b36671b8c3a4432eccf87272",
-"index.html": "8b3e11596d6617a0f6d915fe9570fa43",
-"/": "8b3e11596d6617a0f6d915fe9570fa43",
-"main.dart.js": "423a8f3337516ad1b43e19cd3349d554",
+"index.html": "3dd2df45f7442eb606c63eddf610c82b",
+"/": "3dd2df45f7442eb606c63eddf610c82b",
+"main.dart.js": "41da254f6df7a0aac2fab64528e56a0b",
 "favicon.png": "176b443ed273a2a5a6f5cb11d6d33605",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "manifest.json": "b6ae74078a53c8a38003a48fee1a50cf",
 "assets/AssetManifest.json": "3a0bccf87dcf4ad434f83019dbbfb2a3",
-"assets/NOTICES": "2c41dfd7a6154dbe547af76d2c0791f9",
+"assets/NOTICES": "db626a0cd6800f5f4e487f18c08def0b",
 "assets/FontManifest.json": "a0118188551781970af20ae61ba2050e",
-"assets/fonts/MaterialIcons-Regular.otf": "1288c9e28052e028aba623321f7826ac",
+"assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
 "assets/assets/icons/music.png": "6c24ebe8941b28cf2a45e7d66aa91570",
 "assets/assets/icons/hourglass.png": "c2d940e1832b0219c88c96686c8ceb77",
 "assets/assets/icons/rocket.png": "176b443ed273a2a5a6f5cb11d6d33605",
@@ -41,7 +41,7 @@ self.addEventListener("install", (event) => {
   return event.waitUntil(
     caches.open(TEMP).then((cache) => {
       return cache.addAll(
-        CORE.map((value) => new Request(value + '?revision=' + RESOURCES[value], {'cache': 'reload'})));
+        CORE.map((value) => new Request(value, {'cache': 'reload'})));
     })
   );
 });
@@ -167,7 +167,7 @@ async function downloadOffline() {
     }
     currentContent[key] = true;
   }
-  for (var resourceKey in Object.keys(RESOURCES)) {
+  for (var resourceKey of Object.keys(RESOURCES)) {
     if (!currentContent[resourceKey]) {
       resources.push(resourceKey);
     }
