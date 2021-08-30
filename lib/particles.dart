@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 class MouseAvoidingParticleBehaviour extends RandomParticleBehaviour {
-  final Offset mousePosition;
+  final Offset? mousePosition;
 
   MouseAvoidingParticleBehaviour({
     this.mousePosition,
     ParticleOptions options = const ParticleOptions(),
-    Paint paint,
+    Paint? paint,
   }) : super(options: options, paint: paint);
 
   @override
   void updateParticle(Particle particle, double delta, Duration elapsed) {
     if (mousePosition != null) {
-      particle.dx = (particle.cx - mousePosition.dx) * _speedFactor;
-      particle.dy = (particle.cy - mousePosition.dy) * _speedFactor;
+      particle.dx = (particle.cx - (mousePosition?.dx ?? 0)) * _speedFactor;
+      particle.dy = (particle.cy - (mousePosition?.dy ?? 0)) * _speedFactor;
     }
     return super.updateParticle(particle, delta, elapsed);
   }

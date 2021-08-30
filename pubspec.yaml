@@ -4,14 +4,14 @@ version: 1.0.0+1
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  animated_background: ^1.0.5
-  http: ^0.12.2
+  animated_background: ^2.0.0
+  http: ^0.13.3
 
 dev_dependencies:
   flutter_test:

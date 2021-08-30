@@ -42,7 +42,8 @@ class _SongsButtonState extends State<SongsButton>
 }
 
 Future<void> recommendSong() async {
-  final response = await get('https://caio-top-songs.builtwithdark.com/top');
+  final response =
+      await get(Uri.parse('https://caio-top-songs.builtwithdark.com/top'));
 
   if (200 <= response.statusCode && response.statusCode < 300) {
     final body = jsonDecode(response.body);
@@ -52,18 +53,15 @@ Future<void> recommendSong() async {
 
     final chosen = tracks.first;
 
-    final url = await youtubeLink(
-      '${chosen['artist']['name']} ${chosen['name']}',
-    );
-
-    openUrl(url ?? chosen['url']);
+    openUrl(chosen['url']);
   }
 }
 
-Future<String> youtubeLink(String query) async {
+Future<String?> youtubeLink(String query) async {
   try {
-    final result = await get('https://caio-top-songs.builtwithdark.com/yt/' +
-        query.replaceAll(' ', '+'));
+    final result = await get(Uri.parse(
+      'https://caio-top-songs.builtwithdark.com/yt/${query.replaceAll(' ', '+')}',
+    ));
     final video = jsonDecode(result.body)['video'].first;
     return 'https://www.youtube.com/watch?v=' + video['encrypted_id'];
   } catch (e) {

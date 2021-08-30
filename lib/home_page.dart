@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  Offset _mousePosition;
+  Offset? _mousePosition;
 
   void _onEnter(PointerEnterEvent event) {}
 
@@ -32,7 +32,6 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
     final scaling = (mq.size.width / 800).clamp(0.4, 1.0).toDouble();
-    print('screen size: ${mq.size}, scaling: $scaling');
 
     return MouseRegion(
       onEnter: _onEnter,
@@ -65,7 +64,7 @@ class _HomePageState extends State<HomePage>
 class Info extends StatelessWidget {
   final double scaling;
 
-  const Info({Key key, this.scaling}) : super(key: key);
+  const Info({Key? key, required this.scaling}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +85,7 @@ class Info extends StatelessWidget {
               SizedBox(width: 16 * scaling),
               Image.asset(
                 'assets/icons/wave.png',
+                semanticLabel: 'Waving hand emoji',
                 width: 48 * scaling,
                 height: 48 * scaling,
               ),
@@ -95,24 +95,31 @@ class Info extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                'My name is ',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 48 * scaling,
-                ),
-              ),
-              Text(
-                'Caio',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 48 * scaling,
-                  color: Colors.yellow.shade600,
+              MergeSemantics(
+                child: Row(
+                  children: [
+                    Text(
+                      'My name is ',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 48 * scaling,
+                      ),
+                    ),
+                    Text(
+                      'Caio',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 48 * scaling,
+                        color: Colors.yellow.shade600,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(width: 16 * scaling),
               Image.asset(
                 'assets/icons/rocket.png',
+                semanticLabel: 'Rocket emoji',
                 width: 48 * scaling,
                 height: 48 * scaling,
               ),
@@ -130,37 +137,10 @@ class Info extends StatelessWidget {
                   fontSize: 36 * scaling,
                 ),
               ),
-              // if (MediaQuery.of(context).size.width > 340)
-              //   Text(
-              //     'I work as a Mobile App Developer',
-              //     style: TextStyle(
-              //       fontWeight: FontWeight.bold,
-              //       fontSize: 36 * scaling,
-              //     ),
-              //   )
-              // else
-              //   Column(
-              //     crossAxisAlignment: CrossAxisAlignment.end,
-              //     children: [
-              //       Text(
-              //         'I work as a',
-              //         style: TextStyle(
-              //           fontWeight: FontWeight.bold,
-              //           fontSize: 36 * scaling,
-              //         ),
-              //       ),
-              //       Text(
-              //         'Mobile App Developer',
-              //         style: TextStyle(
-              //           fontWeight: FontWeight.bold,
-              //           fontSize: 36 * scaling,
-              //         ),
-              //       )
-              //     ],
-              //   ),
               SizedBox(width: 16 * scaling),
               Image.asset(
                 'assets/icons/phone.png',
+                semanticLabel: 'Phone emoji',
                 width: 48 * scaling,
                 height: 48 * scaling,
               ),
@@ -177,7 +157,7 @@ class Info extends StatelessWidget {
 class LinkBar extends StatelessWidget {
   final double scaling;
 
-  const LinkBar({Key key, this.scaling}) : super(key: key);
+  const LinkBar({Key? key, required this.scaling}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -253,10 +233,10 @@ class _Link extends StatelessWidget {
   final bool showArrow;
 
   const _Link({
-    Key key,
-    this.label,
-    this.url,
-    this.scaling,
+    Key? key,
+    required this.label,
+    required this.url,
+    required this.scaling,
     this.showArrow = false,
   }) : super(key: key);
 
@@ -297,18 +277,20 @@ class _Link extends StatelessWidget {
 class _Slash extends StatelessWidget {
   final double scaling;
 
-  const _Slash({Key key, this.scaling}) : super(key: key);
+  const _Slash({Key? key, required this.scaling}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Text(
-        '//',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 28 * scaling,
-          color: Colors.yellow,
+    return ExcludeSemantics(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Text(
+          '//',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 28 * scaling,
+            color: Colors.yellow,
+          ),
         ),
       ),
     );
