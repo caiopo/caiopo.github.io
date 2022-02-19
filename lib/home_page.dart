@@ -1,70 +1,52 @@
-import 'package:animated_background/animated_background.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:personal_site/particles.dart';
-import 'package:personal_site/songs.dart';
-import 'package:personal_site/utils.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
-  Offset? _mousePosition;
-
-  void _onEnter(PointerEnterEvent event) {}
-
-  void _onHover(PointerHoverEvent event) {
-    setState(() {
-      _mousePosition = event.position;
-    });
-  }
-
-  void _onExit(PointerExitEvent event) {
-    setState(() {
-      _mousePosition = null;
-    });
-  }
-
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
-    final scaling = (mq.size.width / 800).clamp(0.4, 1.0).toDouble();
 
-    return MouseRegion(
-      onEnter: _onEnter,
-      onHover: _onHover,
-      onExit: _onExit,
-      child: Scaffold(
-        backgroundColor: const Color(0xFF111111),
-        floatingActionButton: SongsButton(),
-        body: AnimatedBackground(
-          behaviour: MouseAvoidingParticleBehaviour(
-            mousePosition: _mousePosition ?? mq.size.center(Offset.zero),
-            options: ParticleOptions(
-              spawnMinSpeed: 50.0,
-              spawnMaxSpeed: 100.0,
-              spawnMinRadius: 3.0,
-              spawnMaxRadius: 8.0,
-              minOpacity: 0.8,
-              maxOpacity: 1.0,
-              baseColor: Colors.yellow,
-            ),
-          ),
-          vsync: this,
-          child: Info(scaling: scaling),
+    return Scaffold(
+      backgroundColor: const Color(0xFF111111),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: _NewInfo(),
         ),
       ),
     );
   }
 }
 
-class Info extends StatelessWidget {
-  final double scaling;
+class _NewInfo extends StatelessWidget {
+  const _NewInfo({Key? key}) : super(key: key);
 
-  const Info({Key? key, required this.scaling}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return DefaultTextStyle.merge(
+      style: theme.textTheme.headline2,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Hi! I\'m'),
+          Text(
+            'Caio Pereira Oliveira',
+            style: theme.textTheme.headline1?.copyWith(color: Colors.amber),
+          ),
+          Text('Software Engineer'),
+        ],
+      ),
+    );
+  }
+}
+
+class Info extends StatelessWidget {
+  const Info({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -79,19 +61,19 @@ class Info extends StatelessWidget {
                 'Hi there!',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 36 * scaling,
+                  fontSize: 36,
                 ),
               ),
-              SizedBox(width: 16 * scaling),
+              SizedBox(width: 16),
               Image.asset(
                 'assets/icons/wave.png',
                 semanticLabel: 'Waving hand emoji',
-                width: 48 * scaling,
-                height: 48 * scaling,
+                width: 48,
+                height: 48,
               ),
             ],
           ),
-          SizedBox(height: 48 * scaling),
+          SizedBox(height: 48),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -102,30 +84,30 @@ class Info extends StatelessWidget {
                       'My name is ',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 48 * scaling,
+                        fontSize: 48,
                       ),
                     ),
                     Text(
                       'Caio',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 48 * scaling,
+                        fontSize: 48,
                         color: Colors.yellow.shade600,
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(width: 16 * scaling),
+              SizedBox(width: 16),
               Image.asset(
                 'assets/icons/rocket.png',
                 semanticLabel: 'Rocket emoji',
-                width: 48 * scaling,
-                height: 48 * scaling,
+                width: 48,
+                height: 48,
               ),
             ],
           ),
-          SizedBox(height: 48 * scaling),
+          SizedBox(height: 48),
           Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -134,20 +116,20 @@ class Info extends StatelessWidget {
                 'I work as a Mobile App Developer',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 36 * scaling,
+                  fontSize: 36,
                 ),
               ),
-              SizedBox(width: 16 * scaling),
+              SizedBox(width: 16),
               Image.asset(
                 'assets/icons/phone.png',
                 semanticLabel: 'Phone emoji',
-                width: 48 * scaling,
-                height: 48 * scaling,
+                width: 48,
+                height: 48,
               ),
             ],
           ),
-          SizedBox(height: 72 * scaling),
-          LinkBar(scaling: scaling),
+          SizedBox(height: 72),
+          LinkBar(),
         ],
       ),
     );
@@ -155,9 +137,7 @@ class Info extends StatelessWidget {
 }
 
 class LinkBar extends StatelessWidget {
-  final double scaling;
-
-  const LinkBar({Key? key, required this.scaling}) : super(key: key);
+  const LinkBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -170,25 +150,21 @@ class LinkBar extends StatelessWidget {
           _Link(
             label: 'Resume',
             url: 'https://www.toptal.com/resume/caio-pereira-oliveira',
-            scaling: scaling,
             showArrow: true,
           ),
           _Link(
             label: 'LinkedIn',
             url: 'https://www.linkedin.com/in/caiopo/',
-            scaling: scaling,
             showArrow: true,
           ),
           _Link(
             label: 'GitHub',
             url: 'http://github.com/caiopo',
-            scaling: scaling,
             showArrow: true,
           ),
           _Link(
             label: 'Email',
             url: 'mailto:hello@caiopo.com',
-            scaling: scaling,
             showArrow: true,
           ),
         ],
@@ -201,25 +177,18 @@ class LinkBar extends StatelessWidget {
         _Link(
           label: 'Resume',
           url: 'https://www.toptal.com/resume/caio-pereira-oliveira',
-          scaling: scaling,
         ),
-        _Slash(scaling: scaling),
         _Link(
           label: 'LinkedIn',
           url: 'https://www.linkedin.com/in/caiopo/',
-          scaling: scaling,
         ),
-        _Slash(scaling: scaling),
         _Link(
           label: 'GitHub',
           url: 'http://github.com/caiopo',
-          scaling: scaling,
         ),
-        _Slash(scaling: scaling),
         _Link(
           label: 'Email',
           url: 'mailto:hello@caiopo.com',
-          scaling: scaling,
         ),
       ],
     );
@@ -229,14 +198,12 @@ class LinkBar extends StatelessWidget {
 class _Link extends StatelessWidget {
   final String label;
   final String url;
-  final double scaling;
   final bool showArrow;
 
   const _Link({
     Key? key,
     required this.label,
     required this.url,
-    required this.scaling,
     this.showArrow = false,
   }) : super(key: key);
 
@@ -244,9 +211,9 @@ class _Link extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(4),
-      onTap: () => openUrl(url),
+      onTap: () {},
       child: Padding(
-        padding: EdgeInsets.all(16 * scaling),
+        padding: EdgeInsets.all(16),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -255,7 +222,7 @@ class _Link extends StatelessWidget {
                 '> ',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 28 * scaling,
+                  fontSize: 28,
                   color: Colors.yellow.shade600,
                 ),
               ),
@@ -263,34 +230,11 @@ class _Link extends StatelessWidget {
               label,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 28 * scaling,
+                fontSize: 28,
                 decoration: TextDecoration.underline,
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _Slash extends StatelessWidget {
-  final double scaling;
-
-  const _Slash({Key? key, required this.scaling}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ExcludeSemantics(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Text(
-          '//',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 28 * scaling,
-            color: Colors.yellow,
-          ),
         ),
       ),
     );
