@@ -28,12 +28,12 @@ class _SnakePageState extends State<SnakePage> {
       renderer: _render,
       boardWidth: boardWidth,
       boardHeight: boardHeight,
-      initialSnakeX: 0,
-      initialSnakeY: 0,
+      initialSnakeX: boardWidth ~/ 5,
+      initialSnakeY: boardHeight ~/ 5,
       initialSnakeDirection: SnakeDirection.right,
       initialSnakeSize: 1,
-      maxTicksBeforeFood: 20,
-      minTicksBeforeFood: 5,
+      maxTicksBeforeFood: 5,
+      minTicksBeforeFood: 0,
     );
     _board = _snakeGame.getBoardWithSnake();
 
@@ -168,6 +168,7 @@ class Controls extends StatelessWidget {
         IconButton(
           onPressed: () => onDirectionChanged(SnakeDirection.up),
           icon: Icon(Icons.arrow_upward),
+          iconSize: 48,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -175,17 +176,20 @@ class Controls extends StatelessWidget {
             IconButton(
               onPressed: () => onDirectionChanged(SnakeDirection.left),
               icon: Icon(Icons.arrow_back),
+              iconSize: 48,
             ),
             SizedBox(width: 48),
             IconButton(
               onPressed: () => onDirectionChanged(SnakeDirection.right),
               icon: Icon(Icons.arrow_forward),
+              iconSize: 48,
             ),
           ],
         ),
         IconButton(
           onPressed: () => onDirectionChanged(SnakeDirection.down),
           icon: Icon(Icons.arrow_downward),
+          iconSize: 48,
         ),
       ],
     );
