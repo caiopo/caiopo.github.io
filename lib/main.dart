@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:personal_site/home_page.dart';
+import 'package:personal_site/snake_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,9 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'caiopo\'s website',
-      theme: buildTheme(),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      theme: buildTheme(),
+      home: SnakePage(),
     );
   }
 }
@@ -28,14 +29,14 @@ ThemeData buildTheme() {
 TextTheme buildTextTheme() {
   final baseTheme = TextTheme(
     headline1: TextStyle(
-      fontSize: 64,
+      fontSize: 70,
       fontWeight: FontWeight.w500,
-      letterSpacing: -1.5,
+      letterSpacing: -1,
     ),
     headline2: TextStyle(
       fontSize: 58,
       fontWeight: FontWeight.w400,
-      letterSpacing: -0.5,
+      letterSpacing: 1,
     ),
     headline3: TextStyle(
       fontSize: 46,

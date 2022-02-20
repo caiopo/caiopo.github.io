@@ -28,10 +28,12 @@ class _NewInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return DefaultTextStyle.merge(
       style: theme.textTheme.headline2,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Hi! I\'m'),
           Text(
