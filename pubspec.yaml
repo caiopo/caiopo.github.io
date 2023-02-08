@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
 
   flame: ^1.6.0
+  flame_forge2d: ^0.12.5
+  flame_tiled: ^1.9.1
 
 dev_dependencies:
   flutter_test:
