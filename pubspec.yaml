@@ -23,3 +23,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/sprites/monsters/
+    - assets/images/sprites/people/
+    - assets/images/tiles/
